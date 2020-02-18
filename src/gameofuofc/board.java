@@ -17,7 +17,7 @@ public class board {
 	        while (myReader.hasNextLine()) {
 	            data = myReader.nextLine();
 	            String [] split = data.split(",");
-	            squares.add(new squares(split[0], Boolean.parseBoolean(split[1]),split[2].charAt(0);, Integer.parseInt(split[3])));
+	            squares.add(new squares(split[0], Boolean.parseBoolean(split[1]),split[2].charAt(0), Integer.parseInt(split[3])));
 	        }
 	        myReader.close();
 	    } catch (FileNotFoundException e) {
