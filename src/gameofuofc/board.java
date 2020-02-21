@@ -24,4 +24,7 @@ public class board {
 	        System.out.println("An error occurred.");
 	    }
 	}
+	public squares getsquare(int index) {
+		return squares.get(index);
+	}
 }
