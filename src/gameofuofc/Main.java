@@ -6,28 +6,24 @@ public class Main {
 		player player1Object = new player(1, null);
 		squares FinalSquare = new square();
 		FinalSquare = ("Final Square", false, 'e', 23);
+		
 	
 		playerObject.setPlayerLocation(boardObject.getsquare(0));
 		
 		player1Object.setPlayerLocation(boardObject.getsquare(0));
 		
+		
+		
 		public void main() {
 			while((playerObject.getType() && player1Object.getType()) != FinalSquare){
+			
+				choosePlayer().spin().moveLocation;
 				
-				playerObject.spin();
 				
-				playerObject.moveLocation();
 				
-				player1Object.spin(); 
-				
-				player1Object.moveLocation();
 				
 				
 				
 			}
-		
-		
-		
 	}
-
 }

@@ -6,6 +6,7 @@ public class squares {
 	char type;
 	int effectVal;
 	
+	
 	squares(String id, Boolean multipath, char type, int effectVal) {
 		this.id = id;
 		this.multipath = multipath;
