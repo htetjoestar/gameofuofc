@@ -1,33 +1,29 @@
 package gameofuofc;
 
 public class squares {
-	String id;
-	Boolean multipath;
+	int id;
 	char type;
 	int effectVal;
+	public squares(){
+		
+	}
 	
-	
-	squares(String id, Boolean multipath, char type, int effectVal) {
+	public squares(int id, char type, int effectVal) {
 		this.id = id;
-		this.multipath = multipath;
 		this.type = type;
 		this.effectVal = effectVal;
 	}
 	
 	//Getters 
-	String getSquareId() {
+	public int getSquareId() {
 		return this.id;
 	}
-	
-	Boolean getMultipath() {
-		return this.multipath;
-	}
-	
-	char getType() {
+
+	public char getType() {
 		return this.type;
 	}
 	
-	int getEffectVal() {
+	public int getEffectVal() {
 		return this.effectVal;
 	}
 }

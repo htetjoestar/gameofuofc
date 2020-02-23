@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class board {
-	ArrayList<squares> squares;
+	ArrayList<squares> squares = new ArrayList<squares>();
 	public board() {
 	    try {
 	        InputStream csvFile = new FileInputStream("csvfiles/prototypecsv.csv");
@@ -17,7 +17,7 @@ public class board {
 	        while (myReader.hasNextLine()) {
 	            data = myReader.nextLine();
 	            String [] split = data.split(",");
-	            squares.add(new squares(split[0], Boolean.parseBoolean(split[1]),split[2].charAt(0), Integer.parseInt(split[3])));
+	            squares.add(new squares(Integer.parseInt(split[0]),split[1].charAt(0), Integer.parseInt(split[2])));
 	        }
 	        myReader.close();
 	    } catch (FileNotFoundException e) {

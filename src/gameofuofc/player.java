@@ -1,20 +1,20 @@
 package gameofuofc;
-import java.math.*;
+//import java.math.*;
 import java.util.Scanner;
 
 public class player {
 	private int playerID;
 	private String playerName;
-	private String playerLocation;
-	Scanner playerInput = new Scanner(System.in)
+	private squares playerLocation;
+	Scanner playerInput = new Scanner(System.in);
 	
-	player(int id, String name) {
+	public player(int id, String name) {
 		this.playerID = id;
 		this.playerName = name;
-		playerLocation = "0";
+		playerLocation = new squares();
 	}
 	
-	int spin() {
+	public int spin() {
 		int min = 1;
 		int max = 6;
 		int randomInt = (int)(Math.random() * (max - min + 1) + min);
@@ -22,41 +22,43 @@ public class player {
 		// Source for random integer generator: https://www.educative.io/edpresso/how-to-generate-random-numbers-in-java 
 	}
 	
-	public int choosePlayer() {
-		int ModulusCounter = 2;
-		
-			ModulusCounter % 2;
-			if( ModulusCounter = 0) {
-				return playerObject;
-			}
-			else {
-				return player1Object;
-			}
-		
-		ModulusCounter ++;
-	}
+//	public int choosePlayer() {
+//		int ModulusCounter = 2;
+//		
+//			ModulusCounter % 2;
+//			if( ModulusCounter == 0) {
+//				return playerObject;
+//			}
+//			else {
+//				return player1Object;
+//			}
+//		
+//		ModulusCounter ++;
+//	}
 	
 	//Getters
 	
-	int getPlayerId() {
+	public int getPlayerId() {
 		return this.playerID;
 	}
 	
-	String getPlayerName() {
+	public squares getPlayerLocation() {
+		return this.playerLocation;
+	}
+	public String getName() {
+		return this.playerName;
+	}
+	//Setters
+	
+	public void setPlayerLocation(squares loc) {
+		this.playerLocation = loc;
+	}
+	public void setPlayerName() {
 		System.out.println("Enter a name for player" + playerID);
-		return if (playerInput.next()!= "") {
+	   if (playerInput.next()!= "") {
 			playerName = playerInput.next();
 		}
 	}
 	
-	String getPlayerLocation() {
-		return this.playerLocation;
-	}
-	
-	//Setters
-	
-	void setPlayerLocation(String loc) {
-		this.playerLocation = loc;
-	}
 }	
 	
