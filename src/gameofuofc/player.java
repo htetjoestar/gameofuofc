@@ -6,21 +6,18 @@ public class player {
 	private int playerID;
 	private String playerName;
 	private squares playerLocation;
+	private int Grades;
+	private int Social;
 	Scanner playerInput = new Scanner(System.in);
 	
 	public player(int id, String name) {
 		this.playerID = id;
 		this.playerName = name;
+		this.Grades = 0;
+		this.Social = 0;
 		playerLocation = new squares();
 	}
 	
-	public int spin() {
-		int min = 1;
-		int max = 6;
-		int randomInt = (int)(Math.random() * (max - min + 1) + min);
-		return randomInt;		
-		// Source for random integer generator: https://www.educative.io/edpresso/how-to-generate-random-numbers-in-java 
-	}
 	
 //	public int choosePlayer() {
 //		int ModulusCounter = 2;
@@ -48,17 +45,24 @@ public class player {
 	public String getName() {
 		return this.playerName;
 	}
+	public int getGrades() {
+		return this.Grades;
+	}
+	public int getSocial() {
+		return this.Social;
+	}
 	//Setters
 	
 	public void setPlayerLocation(squares loc) {
 		this.playerLocation = loc;
 	}
+	
 	public void setPlayerName() {
 		System.out.println("Enter a name for player" + playerID);
 	   if (playerInput.next()!= "") {
 			playerName = playerInput.next();
 		}
 	}
-	
+
 }	
 	
