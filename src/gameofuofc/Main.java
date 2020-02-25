@@ -37,9 +37,11 @@ public class Main {
 			switch (players[numPlayer].getPlayerLocation().getType()) {
 			case 'g':
 				//call method to add to or subtract from grade metric
+				players[numPlayer].setPlayerGrades(players[numPlayer].getGrades() + boardObject.getSquare(moveLoc).getEffectVal());
 				break;
 			case 's':
 				//call method to add to or subtract from social metric
+				players[numPlayer].setPlayerSocial(players[numPlayer].getSocial() + boardObject.getSquare(moveLoc).getEffectVal());
 				break;
 			case 'w':
 				//call method to draw wild-card

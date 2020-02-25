@@ -63,6 +63,14 @@ public class player {
 			playerName = playerInput.next();
 		}
 	}
+	
+	public void setPlayerGrades(int newGradeVal) {
+		this.Grades = newGradeVal;
+	}
+	
+	public void setPlayerSocial(int newSocialVal) {
+		this.Social = newSocialVal;
+	}
 
 }	
 	
