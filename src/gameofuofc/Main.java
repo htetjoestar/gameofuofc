@@ -1,10 +1,20 @@
 package gameofuofc;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
 public class Main {
 
 		public board boardObject = new board();
 		player playerObject = new player(0, "");
 		player player1Object = new player(1, "");
 		player[] players = {playerObject, player1Object};
+		static ArrayList<wildcards> wildcards = new ArrayList<wildcards>();
 		
 		public void main(String[] args) {
 
@@ -12,6 +22,7 @@ public class Main {
 			
 			player1Object.setPlayerLocation(boardObject.getSquare(0));
 			
+			shuffleWildcards();
 				
 			while((playerObject.getPlayerLocation().getType() != 'e' && player1Object.getPlayerLocation().getType() != 'e') ){
 			
@@ -45,10 +56,37 @@ public class Main {
 				break;
 			case 'w':
 				//call method to draw wild-card
+				drawCard();
+				
 				break;
 			default:
 				break;
 			}
 			
+		}	
+		
+		
+		public static wildcards drawCard() {
+			Collections.shuffle(wildcards);
+			return wildcards.get(0);
 		}
+		
+		
+		public static void shuffleWildcards(){
+    		try {
+        	InputStream csvFile = new FileInputStream("wildcards.csv");
+        	Scanner myReader = new Scanner(new InputStreamReader(csvFile));
+        	String data;
+        	while (myReader.hasNextLine()) {
+            	data = myReader.nextLine();
+            	String [] split = data.split(",");
+            	wildcards.add(new wildcards(split[0],split[1].charAt(0),Integer.parseInt(split[2])));
+            
+        	}
+        	myReader.close();
+        	Collections.shuffle(wildcards);
+    		} catch (FileNotFoundException e) {
+        System.out.println("An error occurred.");
+    	}
+	}
 }

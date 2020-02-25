@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class player {
 	private int playerID;
 	private String playerName;
-	private squares playerLocation;
+	private Square playerLocation;
 	private int Grades;
 	private int Social;
 	Scanner playerInput = new Scanner(System.in);
@@ -15,7 +15,7 @@ public class player {
 		this.playerName = name;
 		this.Grades = 0;
 		this.Social = 0;
-		playerLocation = new squares();
+		playerLocation = new Square();
 	}
 	
 	
@@ -39,7 +39,7 @@ public class player {
 		return this.playerID;
 	}
 	
-	public squares getPlayerLocation() {
+	public Square getPlayerLocation() {
 		return this.playerLocation;
 	}
 	public String getName() {
@@ -53,7 +53,7 @@ public class player {
 	}
 	//Setters
 	
-	public void setPlayerLocation(squares loc) {
+	public void setPlayerLocation(Square loc) {
 		this.playerLocation = loc;
 	}
 	

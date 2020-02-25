@@ -1,20 +1,20 @@
 package gameofuofc;
 
-public class squares {
+public class Square {
 	int id;
 	char type;
 	int effectVal;
-	public squares(){
-		
+	public Square(){
+
 	}
-	
-	public squares(int id, char type, int effectVal) {
+
+	public Square(int id, char type, int effectVal) {
 		this.id = id;
 		this.type = type;
 		this.effectVal = effectVal;
 	}
-	
-	//Getters 
+
+	//Getters
 	public int getSquareId() {
 		return this.id;
 	}
@@ -22,7 +22,7 @@ public class squares {
 	public char getType() {
 		return this.type;
 	}
-	
+
 	public int getEffectVal() {
 		return this.effectVal;
 	}
