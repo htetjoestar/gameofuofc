@@ -12,4 +12,10 @@ public class wildcards {
     public String getDisc() {
     	return desc;
     }
+    public char getEff() {
+    	return effect;
+    }
+    public int getEffectVal() {
+    	return effectVal;
+    }
 }
