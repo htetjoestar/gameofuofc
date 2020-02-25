@@ -56,7 +56,7 @@ public class Main {
 				break;
 			case 'w':
 				//call method to draw wild-card
-				drawCard();
+				drawCard(numPlayer);
 				
 				break;
 			default:
@@ -66,9 +66,24 @@ public class Main {
 		}	
 		
 		
-		public static wildcards drawCard() {
+		public void drawCard(int numPlayer) {
+			wildcards drawn = new wildcards("", 'd', 0);
 			Collections.shuffle(wildcards);
-			return wildcards.get(0);
+			drawn = wildcards.get(0);
+			switch (players[numPlayer].getPlayerLocation().getType()) {
+			case 'g':
+				//call method to add to or subtract from grade metric
+				players[numPlayer].setPlayerGrades(players[numPlayer].getGrades() + drawn.getEffectVal());
+				break;
+			case 's':
+				//call method to add to or subtract from social metric
+				players[numPlayer].setPlayerGrades(players[numPlayer].getSocial() + drawn.getEffectVal());
+				break;
+			case 'b':
+				players[numPlayer].setPlayerGrades(players[numPlayer].getGrades() + drawn.getEffectVal());
+				players[numPlayer].setPlayerGrades(players[numPlayer].getSocial() + drawn.getEffectVal());
+				break;
+			}
 		}
 		
 		
