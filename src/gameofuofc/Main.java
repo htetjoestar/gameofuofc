@@ -23,6 +23,9 @@ public class Main {
 			
 			player1Object.setPlayerLocation(boardObject.getSquare(0));
 			
+			playerObject.setPlayerName();
+			player1Object.setPlayerName();
+			
 			shuffleWildcards();
 		
 			while(seeIfBothPlayersFinished() ==  false) {
@@ -32,9 +35,9 @@ public class Main {
 			
 			
 			}
-			// seeWhoWon();
-			// This is where we total the grades and the social bars we add them together and see which player has the higher score
-			// return who won and congratulate them												
+				
+			seeWhoWon();
+			System.exit(0);
 				
 					}
 				
@@ -161,6 +164,38 @@ public class Main {
 			System.out.println("Social score: " + i.getSocial());
 			System.out.println("");
 		}
+	}
+	
+	public player seeWhoWon() {
+		int player0Total = 0;
+		int player1Total = 0;
+		
+		player0Total = players[0].getGrades() + players[0].getSocial();
+		player1Total = players[1].getGrades() + players[1].getSocial();
+		
+		if (player0Total > player1Total) {
+			System.out.println(players[0].getName() + "Has won the game with a total score of" + player0Total);
+			return players[0];
+		}
+		if (player0Total < player1Total) {
+			System.out.println(players[1].getName() + "Has won the game with a total score of" + player1Total);
+			return players[1];
+		}
+		if (player0Total == player1Total) {
+			System.out.println("There has been a tie, the winner will now be randomized");
+			int min = 1;
+			int max = 6;
+			int randomInt = (int)(Math.random() * (max - min + 1) + min);
+			if (randomInt >= 3) {
+				System.out.println(players[1].getName() + "Has won the game!");
+			}
+			else {
+				System.out.println(players[0].getName() + "Has won the game!");
+			}
+			
+		}
+		return null;
+		
 	}
 	
 }

@@ -19,19 +19,7 @@ public class player {
 	}
 	
 	
-//	public int choosePlayer() {
-//		int ModulusCounter = 2;
-//		
-//			ModulusCounter % 2;
-//			if( ModulusCounter == 0) {
-//				return playerObject;
-//			}
-//			else {
-//				return player1Object;
-//			}
-//		
-//		ModulusCounter ++;
-//	}
+
 	
 	//Getters
 	
@@ -60,7 +48,7 @@ public class player {
 	public void setPlayerName() {
 		System.out.println("Enter a name for player" + playerID);
 	   if (playerInput.next()!= "") {
-			playerName = playerInput.next();
+			playerName = playerInput.nextLine();
 		}
 	}
 	
