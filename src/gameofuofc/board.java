@@ -7,9 +7,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class board {
+public class Board {
 	ArrayList<Square> squares = new ArrayList<Square>();
-	public board() {
+	public Board() {
 	    try {
 	        InputStream csvFile = new FileInputStream("csvfiles/prototypecsv.csv");
 	        Scanner myReader = new Scanner(new InputStreamReader(csvFile));

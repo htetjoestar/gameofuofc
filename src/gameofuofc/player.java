@@ -2,7 +2,7 @@ package gameofuofc;
 //import java.math.*;
 import java.util.Scanner;
 
-public class player {
+public class Player {
 	private int playerID;
 	private String playerName;
 	private Square playerLocation;
@@ -10,7 +10,7 @@ public class player {
 	private int Social;
 	Scanner playerInput = new Scanner(System.in);
 	
-	public player(int id, String name) {
+	public Player(int id, String name) {
 		this.playerID = id;
 		this.playerName = name;
 		this.Grades = 0;

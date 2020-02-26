@@ -10,14 +10,14 @@ import java.util.Scanner;
 
 public class Main {
 
-		public board boardObject = new board();
-		player playerObject = new player(0, "");
-		player player1Object = new player(1, "");
-		player[] players = {playerObject, player1Object};
-		public int currentPlayer = 0;
+		public static Board boardObject = new Board();
+		static Player playerObject = new Player(0, "");
+		static Player player1Object = new Player(1, "");
+		static Player[] players = {playerObject, player1Object};
+		public static int currentPlayer = 0;
 		static ArrayList<wildcards> wildcards = new ArrayList<wildcards>();
 		
-		public void main(String[] args) {
+		public static void main(String[] args) {
 
 			playerObject.setPlayerLocation(boardObject.getSquare(0));
 			
@@ -43,7 +43,7 @@ public class Main {
 				
 			
 		
-		public int spin() {
+		public static int spin() {
 			int min = 1;
 			int max = 6;
 			int randomInt = (int)(Math.random() * (max - min + 1) + min);
@@ -51,7 +51,7 @@ public class Main {
 			// Source for random integer generator: https://www.educative.io/edpresso/how-to-generate-random-numbers-in-java 
 		}
 		
-		public void movePlayer(int numPlayer, int numMove) {
+		public static void movePlayer(int numPlayer, int numMove) {
 			int moveLoc;    // location to move
 
 			moveLoc = players[numPlayer].getPlayerLocation().getSquareId() + numMove; // location to move = current location + distance to move
@@ -77,7 +77,7 @@ public class Main {
 		}	
 		
 		
-		public void drawCard(int numPlayer) {
+		public static void drawCard(int numPlayer) {
 			wildcards drawn = new wildcards("", 'd', 0);
 			Collections.shuffle(wildcards);
 			drawn = wildcards.get(0);
@@ -116,7 +116,7 @@ public class Main {
     	}
 	}
 		
-		public int choosePlayer() {
+		public static int choosePlayer() {
 		int ModulusCounter = 2;
 		int checkPlayer = 0;
 		
@@ -134,7 +134,7 @@ public class Main {
 		
 		
 	}
-	public int seeIfPlayerFinished(int player) {
+	public static int seeIfPlayerFinished(int player) {
 		
 		if(players[player].getPlayerLocation().getType() == 'e') {
 			return choosePlayer();
@@ -147,7 +147,7 @@ public class Main {
 				
 }
 	
-	public boolean seeIfBothPlayersFinished() {
+	public static boolean seeIfBothPlayersFinished() {
 		for (int counter = 0; counter < players.length; counter ++) {
 			if (players[counter].getPlayerLocation().getType() != 'e') {
 				return false;
@@ -156,8 +156,8 @@ public class Main {
 		return true;
 	}
 	
-	public void printPlayersStats() {
-		for (player i : players) {
+	public static void printPlayersStats() {
+		for (Player i : players) {
 			System.out.println("Stats for player " + i.getName() + " (playerID = " + i.getPlayerId() + "+) :" );
 			System.out.println("Currently on square " + i.getPlayerLocation());
 			System.out.println("Grades score: " + i.getGrades());
@@ -166,7 +166,7 @@ public class Main {
 		}
 	}
 	
-	public player seeWhoWon() {
+	public static Player seeWhoWon() {
 		int player0Total = 0;
 		int player1Total = 0;
 		
