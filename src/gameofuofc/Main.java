@@ -152,4 +152,15 @@ public class Main {
 		}
 		return true;
 	}
+	
+	public void printPlayersStats() {
+		for (player i : players) {
+			System.out.println("Stats for player " + i.getName() + " (playerID = " + i.getPlayerId() + "+) :" );
+			System.out.println("Currently on square " + i.getPlayerLocation());
+			System.out.println("Grades score: " + i.getGrades());
+			System.out.println("Social score: " + i.getSocial());
+			System.out.println("");
+		}
 	}
+	
+}
