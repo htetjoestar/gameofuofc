@@ -15,7 +15,13 @@ public class Main {
 		static Player player1Object = new Player(1, "");
 		static Player[] players = {playerObject, player1Object};
 		public static int currentPlayer = 0;
+		static int selection;
+		static Scanner playerin = new Scanner(System.in);
+		static int ModulusCounter = 2;
+		static int checkPlayer = 0;
+		static int decisionMade = 0;
 		static ArrayList<wildcards> wildcards = new ArrayList<wildcards>();
+		static ArrayList<Decisions> decisions = new ArrayList<Decisions>();
 		
 		public static void main(String[] args) {
 
@@ -25,15 +31,31 @@ public class Main {
 			
 			playerObject.setPlayerName();
 			player1Object.setPlayerName();
-			
+			initializeDecisions();
 			shuffleWildcards();
-		
+			
+			System.out.println("Welcome to the game of UOFC! ");
+			System.out.println("Press ENTER to continue ");
+			playerin.nextLine();
+			
 			while(seeIfBothPlayersFinished() ==  false) {
-			currentPlayer = choosePlayer();
-			currentPlayer = seeIfPlayerFinished(currentPlayer);
-			movePlayer(currentPlayer, spin());
-			
-			
+				currentPlayer = choosePlayer();
+				currentPlayer = seeIfPlayerFinished(currentPlayer);
+				selection = 0;
+				while(selection != 1) {
+					System.out.println(players[currentPlayer].getName()+ "'s turn");
+					System.out.println("1: spin the spinner and move player");
+					System.out.println("2: print player stats");
+					selection = playerin.nextInt();
+					if(selection == 2) {
+						printPlayersStats();
+					}
+				}
+				System.out.println("---------------------------------------");
+				movePlayer(currentPlayer, spin());
+				System.out.print(players[currentPlayer].getName() + " is currently at ");
+				System.out.println(players[currentPlayer].getPlayerLocation().getSquareId());
+				System.out.println("---------------------------------------");
 			}
 				
 			seeWhoWon();
@@ -53,20 +75,42 @@ public class Main {
 		
 		public static void movePlayer(int numPlayer, int numMove) {
 			int moveLoc;    // location to move
-
+			
 			moveLoc = players[numPlayer].getPlayerLocation().getSquareId() + numMove; // location to move = current location + distance to move
+			for(int index = players[numPlayer].getPlayerLocation().getSquareId(); index < moveLoc;index++) {
+				if (boardObject.getSquare(index).getType() == 'd') {
+					System.out.println("You have arrived at a decison spot");
+					decisionMade = decisions.get(boardObject.getSquare(index).getEffectVal()).makeDecision();
+					if (decisionMade == 1) {
+						players[numPlayer].decisionEffects(decisions.get(boardObject.getSquare(index).getEffectVal()).getEffg1(), decisions.get(boardObject.getSquare(index).getEffectVal()).getEffs1());
+					}
+					if (decisionMade == 2) {
+						players[numPlayer].decisionEffects(decisions.get(boardObject.getSquare(index).getEffectVal()).getEffg2(), decisions.get(boardObject.getSquare(index).getEffectVal()).getEffs2());
+					}
+				} 
+				if (boardObject.getSquare(index).getType() == 'e') {
+					System.out.println(players[numPlayer].getName() + " has reached he finish point");
+					players[numPlayer].setPlayerLocation(boardObject.getSquare(index));
+					return;
+				}
+			}
 			players[numPlayer].setPlayerLocation(boardObject.getSquare(moveLoc));
 			switch (players[numPlayer].getPlayerLocation().getType()) {
 			case 'g':
 				//call method to add to or subtract from grade metric
 				players[numPlayer].setPlayerGrades(players[numPlayer].getGrades() + boardObject.getSquare(moveLoc).getEffectVal());
+				System.out.println(players[numPlayer].getName() +" has landed on a grade boost square");
+				System.out.println(Integer.toString(boardObject.getSquare(moveLoc).getEffectVal()) + " boost to grade");
 				break;
 			case 's':
 				//call method to add to or subtract from social metric
 				players[numPlayer].setPlayerSocial(players[numPlayer].getSocial() + boardObject.getSquare(moveLoc).getEffectVal());
+				System.out.println(players[numPlayer].getName() +" has landed on a social boost square");
+				System.out.println(Integer.toString(boardObject.getSquare(moveLoc).getEffectVal()) + " boost to social");
 				break;
 			case 'w':
 				//call method to draw wild-card
+				System.out.println("You have landed on a wild-card square");
 				drawCard(numPlayer);
 				
 				break;
@@ -81,26 +125,45 @@ public class Main {
 			wildcards drawn = new wildcards("", 'd', 0);
 			Collections.shuffle(wildcards);
 			drawn = wildcards.get(0);
-			switch (players[numPlayer].getPlayerLocation().getType()) {
+			System.out.println(drawn.getDisc());
+			switch (drawn.getEff()) {
 			case 'g':
 				//call method to add to or subtract from grade metric
+				System.out.println(Integer.toString(drawn.getEffectVal()) + " has been added to grades");
 				players[numPlayer].setPlayerGrades(players[numPlayer].getGrades() + drawn.getEffectVal());
 				break;
 			case 's':
 				//call method to add to or subtract from social metric
+				System.out.println(Integer.toString(drawn.getEffectVal()) + " has been added to social");
 				players[numPlayer].setPlayerGrades(players[numPlayer].getSocial() + drawn.getEffectVal());
 				break;
 			case 'b':
+				System.out.println(Integer.toString(drawn.getEffectVal()) + " has been added to both grades and social");
 				players[numPlayer].setPlayerGrades(players[numPlayer].getGrades() + drawn.getEffectVal());
 				players[numPlayer].setPlayerGrades(players[numPlayer].getSocial() + drawn.getEffectVal());
 				break;
 			}
 		}
-		
+		public static void initializeDecisions(){
+    		try {
+        	InputStream csvFile = new FileInputStream("csvfiles/decisions.csv");
+        	Scanner myReader = new Scanner(new InputStreamReader(csvFile));
+        	String data;
+        	while (myReader.hasNextLine()) {
+            	data = myReader.nextLine();
+            	String [] split = data.split(",");
+            	decisions.add(new Decisions(split[0],split[1],Integer.parseInt(split[2]),Integer.parseInt(split[3]),split[4],Integer.parseInt(split[5]),Integer.parseInt(split[6])));
+            
+        	}
+        	myReader.close();
+    		} catch (FileNotFoundException e) {
+        System.out.println("An error occurred.");
+    	}
+	}
 		
 		public static void shuffleWildcards(){
     		try {
-        	InputStream csvFile = new FileInputStream("wildcards.csv");
+        	InputStream csvFile = new FileInputStream("csvfiles/wildcards.csv");
         	Scanner myReader = new Scanner(new InputStreamReader(csvFile));
         	String data;
         	while (myReader.hasNextLine()) {
@@ -117,9 +180,7 @@ public class Main {
 	}
 		
 		public static int choosePlayer() {
-		int ModulusCounter = 2;
-		int checkPlayer = 0;
-		
+
 		
 			checkPlayer = ModulusCounter % 2;
 			if( checkPlayer  == 0) {
@@ -158,8 +219,8 @@ public class Main {
 	
 	public static void printPlayersStats() {
 		for (Player i : players) {
-			System.out.println("Stats for player " + i.getName() + " (playerID = " + i.getPlayerId() + "+) :" );
-			System.out.println("Currently on square " + i.getPlayerLocation());
+			System.out.println("Stats for player " + i.getName() + " (playerID = " + i.getPlayerId() + ") :" );
+			System.out.println("Currently on square " + i.getPlayerLocation().getSquareId());
 			System.out.println("Grades score: " + i.getGrades());
 			System.out.println("Social score: " + i.getSocial());
 			System.out.println("");
@@ -174,11 +235,11 @@ public class Main {
 		player1Total = players[1].getGrades() + players[1].getSocial();
 		
 		if (player0Total > player1Total) {
-			System.out.println(players[0].getName() + "Has won the game with a total score of" + player0Total);
+			System.out.println(players[0].getName() + " Has won the game with a total score of " + player0Total);
 			return players[0];
 		}
 		if (player0Total < player1Total) {
-			System.out.println(players[1].getName() + "Has won the game with a total score of" + player1Total);
+			System.out.println(players[1].getName() + " Has won the game with a total score of " + player1Total);
 			return players[1];
 		}
 		if (player0Total == player1Total) {
@@ -187,10 +248,10 @@ public class Main {
 			int max = 6;
 			int randomInt = (int)(Math.random() * (max - min + 1) + min);
 			if (randomInt >= 3) {
-				System.out.println(players[1].getName() + "Has won the game!");
+				System.out.println(players[1].getName() + " Has won the game!");
 			}
 			else {
-				System.out.println(players[0].getName() + "Has won the game!");
+				System.out.println(players[0].getName() + " Has won the game!");
 			}
 			
 		}

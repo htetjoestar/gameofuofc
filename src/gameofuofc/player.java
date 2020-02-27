@@ -46,10 +46,10 @@ public class Player {
 	}
 	
 	public void setPlayerName() {
-		System.out.println("Enter a name for player" + playerID);
-	   if (playerInput.next()!= "") {
-			playerName = playerInput.nextLine();
-		}
+		System.out.println("Enter a name for player " + playerID);
+
+			this.playerName = playerInput.nextLine();
+		
 	}
 	
 	public void setPlayerGrades(int newGradeVal) {
@@ -59,6 +59,11 @@ public class Player {
 	public void setPlayerSocial(int newSocialVal) {
 		this.Social = newSocialVal;
 	}
-
+	public void decisionEffects(int eff1, int eff2) {
+		this.Social = this.Social + eff1;
+		this.Grades = this.Grades + eff2;
+		System.out.println(Integer.toString(eff1) + " has been added to social");
+		System.out.println(Integer.toString(eff2) + " has been added to grades");
+	}
 }	
 	
