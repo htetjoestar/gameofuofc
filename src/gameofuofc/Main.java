@@ -89,7 +89,7 @@ public class Main {
 					}
 				} 
 				if (boardObject.getSquare(index).getType() == 'e') {
-					System.out.println(players[numPlayer].getName() + " has reached he finish point");
+					System.out.println(players[numPlayer].getName() + " has reached the finish point");
 					players[numPlayer].setPlayerLocation(boardObject.getSquare(index));
 					return;
 				}
