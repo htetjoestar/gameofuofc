@@ -59,11 +59,6 @@ public class Player {
 	public void setPlayerSocial(int newSocialVal) {
 		this.Social = newSocialVal;
 	}
-	public void decisionEffects(int eff1, int eff2) {
-		this.Social = this.Social + eff1;
-		this.Grades = this.Grades + eff2;
-		System.out.println(Integer.toString(eff1) + " has been added to social");
-		System.out.println(Integer.toString(eff2) + " has been added to grades");
-	}
+
 }	
 	

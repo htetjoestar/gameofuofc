@@ -82,10 +82,10 @@ public class Main {
 					System.out.println("You have arrived at a decison spot");
 					decisionMade = decisions.get(boardObject.getSquare(index).getEffectVal()).makeDecision();
 					if (decisionMade == 1) {
-						players[numPlayer].decisionEffects(decisions.get(boardObject.getSquare(index).getEffectVal()).getEffg1(), decisions.get(boardObject.getSquare(index).getEffectVal()).getEffs1());
+						decisionEffects(decisions.get(boardObject.getSquare(index).getEffectVal()).getEffg1(), decisions.get(boardObject.getSquare(index).getEffectVal()).getEffs1(), players[numPlayer]);
 					}
 					if (decisionMade == 2) {
-						players[numPlayer].decisionEffects(decisions.get(boardObject.getSquare(index).getEffectVal()).getEffg2(), decisions.get(boardObject.getSquare(index).getEffectVal()).getEffs2());
+						decisionEffects(decisions.get(boardObject.getSquare(index).getEffectVal()).getEffg2(), decisions.get(boardObject.getSquare(index).getEffectVal()).getEffs2(), players[numPlayer]);
 					}
 				} 
 				if (boardObject.getSquare(index).getType() == 'e') {
@@ -257,6 +257,13 @@ public class Main {
 		}
 		return null;
 		
+	}
+	
+	public static void decisionEffects(int eff1, int eff2, Player playerobj) {
+		playerobj.setPlayerSocial(playerobj.getSocial() + eff1);
+		playerobj.setPlayerGrades(playerobj.getGrades() + eff2);
+		System.out.println(Integer.toString(eff1) + " has been added to social");
+		System.out.println(Integer.toString(eff2) + " has been added to grades");
 	}
 	
 }
