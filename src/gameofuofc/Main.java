@@ -159,6 +159,7 @@ public class Main {
     		} catch (FileNotFoundException e) {
         System.out.println("An error occurred.");
     	}
+    		// this code is copied from my hackathon app
 	}
 		
 		public static void shuffleWildcards(){
@@ -177,6 +178,7 @@ public class Main {
     		} catch (FileNotFoundException e) {
         System.out.println("An error occurred.");
     	}
+    		// this code is copied from my hackathon app
 	}
 		
 		public static int choosePlayer() {

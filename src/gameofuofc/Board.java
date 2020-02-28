@@ -21,8 +21,9 @@ public class Board {
 	        }
 	        myReader.close();
 	    } catch (FileNotFoundException e) {
-	        System.out.println("An error occurred.");
+	        System.out.println("error error");
 	    }
+	    // this code is copied from my hackathon app
 	}
 	public Square getSquare(int index) {
 		return squares.get(index);
