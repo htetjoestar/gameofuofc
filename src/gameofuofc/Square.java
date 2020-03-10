@@ -1,6 +1,12 @@
 package gameofuofc;
 
-public class Square {
+import java.io.Serializable;
+
+public class Square implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2L;
 	int id;
 	char type;
 	int effectVal;

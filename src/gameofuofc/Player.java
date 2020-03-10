@@ -1,14 +1,17 @@
 package gameofuofc;
+import java.io.Serializable;
 //import java.math.*;
-import java.util.Scanner;
 
-public class Player {
+public class Player implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int playerID;
 	private String playerName;
 	private Square playerLocation;
 	private int Grades;
 	private int Social;
-	Scanner playerInput = new Scanner(System.in);
 	
 	public Player(int id, String name) {
 		this.playerID = id;
@@ -45,10 +48,10 @@ public class Player {
 		this.playerLocation = loc;
 	}
 	
-	public void setPlayerName() {
-		System.out.println("Enter a name for player " + playerID);
+	public void setPlayerName(String input) {
+		
 
-			this.playerName = playerInput.nextLine();
+			this.playerName = input;
 		
 	}
 	
