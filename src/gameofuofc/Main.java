@@ -8,8 +8,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-public class Main {
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
+public class Main extends Application {
+		
 		public static Board boardObject = new Board();
 		static Player playerObject = new Player(0, "");
 		static Player player1Object = new Player(1, "");
@@ -23,8 +30,16 @@ public class Main {
 		static ArrayList<wildcards> wildcards = new ArrayList<wildcards>();
 		static ArrayList<Decisions> decisions = new ArrayList<Decisions>();
 		
+		public void start(Stage primaryStage) throws Exception {
+			Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+			primaryStage.setTitle("Hello World");
+			primaryStage.setScene(new Scene(root, 600, 400));
+			primaryStage.show();
+		}
+		
 		public static void main(String[] args) {
-
+			launch(args);
+			
 			playerObject.setPlayerLocation(boardObject.getSquare(0));
 			
 			player1Object.setPlayerLocation(boardObject.getSquare(0));
@@ -267,5 +282,7 @@ public class Main {
 		System.out.println(Integer.toString(eff1) + " has been added to social");
 		System.out.println(Integer.toString(eff2) + " has been added to grades");
 	}
+
+	
 	
 }
