@@ -1,9 +1,14 @@
 package gameofuofc;
 
+import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -23,20 +28,27 @@ public class Main {
 		static ArrayList<wildcards> wildcards = new ArrayList<wildcards>();
 		static ArrayList<Decisions> decisions = new ArrayList<Decisions>();
 		
-		public static void main(String[] args) {
+		public static void main(String[] args) throws IOException {
 
 			playerObject.setPlayerLocation(boardObject.getSquare(0));
 			
 			player1Object.setPlayerLocation(boardObject.getSquare(0));
-			
-			playerObject.setPlayerName();
-			player1Object.setPlayerName();
+
 			initializeDecisions();
 			shuffleWildcards();
 			
 			System.out.println("Welcome to the game of UOFC! ");
-			System.out.println("Press ENTER to continue ");
-			playerin.nextLine();
+			System.out.println("Press '1' to continue ");
+			System.out.println("or input '2' to load a game");
+			if (playerin.nextInt() == 2) {
+				ArrayList<Player> TempArrList4Load = new ArrayList<Player>();
+				TempArrList4Load = serializeDataIn();
+				players[0] = TempArrList4Load.get(0);
+				players[1] = TempArrList4Load.get(1);		
+			}
+
+			players[0].setPlayerName("htet");
+			players[1].setPlayerName("tin");
 			
 			while(seeIfBothPlayersFinished() ==  false) {
 				currentPlayer = choosePlayer();
@@ -46,9 +58,16 @@ public class Main {
 					System.out.println(players[currentPlayer].getName()+ "'s turn");
 					System.out.println("1: spin the spinner and move player");
 					System.out.println("2: print player stats");
+					System.out.println("3: save game");
 					selection = playerin.nextInt();
 					if(selection == 2) {
 						printPlayersStats();
+					}
+					if(selection == 3) {
+						ArrayList<Player> TempArrList = new ArrayList<Player>();
+						TempArrList.add(players[0]);
+						TempArrList.add(players[1]);
+						dataout(TempArrList);
 					}
 				}
 				System.out.println("---------------------------------------");
@@ -267,5 +286,62 @@ public class Main {
 		System.out.println(Integer.toString(eff1) + " has been added to social");
 		System.out.println(Integer.toString(eff2) + " has been added to grades");
 	}
+
+	public static boolean checkFileExists() throws ClassNotFoundException  {
+		   try {
+			   String fileName = "object.txt";
+			   FileInputStream fin = new FileInputStream(fileName);
+			   ObjectInputStream ois = new ObjectInputStream(fin);
+			   try {
+		   			ois.readObject();
+		   			ois.close();
+		   			return true;   //RETURN TRUE WHEN FILE EXISTS AND DATA EXISTS
+		   		}catch (EOFException e) {
+		   			return false; //RETURN FALSE WHEN FILE EXISTS BUT NO DATA EXISTS
+		   		}
+		} catch (IOException e) {
+			return false;		//RETURN FALSE WHEN FILE DOES NOT EXIST
+		}
+	}
 	
+	public static void dataout(ArrayList<Player> people) throws IOException {
+		try {
+		String fileName = "object.txt";
+		FileOutputStream fos = new FileOutputStream(fileName);
+		ObjectOutputStream oos = new ObjectOutputStream(fos);
+		for(int x = 0; x < people.size();x ++) {
+			oos.writeObject(people.get(x));
+		}
+		oos.close();
+		}catch(IOException e){
+			
+		}
+		
+	}
+	
+	public static ArrayList<Player> serializeDataIn(){
+		   String fileName= "object.txt";
+		   ArrayList<Player> people= new ArrayList<Player>();
+		   try {
+		   FileInputStream fin = new FileInputStream(fileName);
+		   ObjectInputStream ois = new ObjectInputStream(fin);
+		   		try {
+		   			for(int i = 0; i < 4 ; i++) {
+		   			people.add((Player) ois.readObject());
+		   			}
+		   		}catch (EOFException e) {
+			   // End of stream
+		   		} 
+			ois.close();
+			return people;
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		   return null;
+		}
+	
+	public static void playerName(int playerID) {
+		String input = playerin.nextLine();
+		players[playerID].setPlayerName(input);
+	}
 }
