@@ -64,10 +64,7 @@ public class Main{
 			}
 
 
-			players[0].setPlayerName("htet");
-			players[1].setPlayerName("tin");
-			
-			
+		
 			
 
 						
@@ -77,6 +74,11 @@ public class Main{
 				currentPlayer = choosePlayer();
 				currentPlayer = seeIfPlayerFinished(currentPlayer);
 				selection = 0;
+				if (players[currentPlayer].getIsAI() == true) {
+					selection = 1;
+					
+				}
+				
 				while(selection != 1) {
 					System.out.println(players[currentPlayer].getName()+ "'s turn");
 					System.out.println("1: spin the spinner and move player");
@@ -375,10 +377,17 @@ public class Main{
 		Scanner playernamein = new Scanner(System.in);
 
 		for (int i = 0; i < players.length; i++) {
-
+			
+			
 			System.out.println("Input the name for player " + (i+1));
 			String input = playernamein.nextLine();
+			if(input.equals("")) {
+				players[i].setPlayerName("Computer 1");
+				players[i].setIsAI(true);
+			}
+			else {
 			players[i].setPlayerName(input);
+			}
 		}
 	}
 	

@@ -12,7 +12,7 @@ public class Player implements Serializable {
 	private Square playerLocation;
 	private int Grades;
 	private int Social;
-	
+	private boolean isAI;
 	public Player(int id, String name) {
 		this.playerID = id;
 		this.playerName = name;
@@ -42,6 +42,10 @@ public class Player implements Serializable {
 	public int getSocial() {
 		return this.Social;
 	}
+	
+	public boolean getIsAI() {
+		return this.isAI;
+	}
 	//Setters
 	
 	public void setPlayerLocation(Square loc) {
@@ -61,6 +65,10 @@ public class Player implements Serializable {
 	
 	public void setPlayerSocial(int newSocialVal) {
 		this.Social = newSocialVal;
+	}
+	
+	public void setIsAI(boolean AI) {
+		this.isAI = AI;
 	}
 
 }	
