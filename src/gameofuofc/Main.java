@@ -120,6 +120,13 @@ public class Main{
 			// Source for random integer generator: https://www.educative.io/edpresso/how-to-generate-random-numbers-in-java 
 		}
 		
+		public static int computerRandom() {
+			int min = 1;
+			int max = 2;
+			int randomInt = (int)(Math.random() * (max - min + 1) + min);
+			return randomInt;
+		}
+		
 		//Method for moving players
 		public static void movePlayer(int numPlayer, int numMove) {
 			int moveLoc;    // location to move
@@ -128,7 +135,14 @@ public class Main{
 			for(int index = players[numPlayer].getPlayerLocation().getSquareId(); index < moveLoc;index++) {
 				if (boardObject.getSquare(index).getType() == 'd') {   // check if landed on a decision spot
 					System.out.println("You have arrived at a decison spot");
-					decisionMade = decisions.get(boardObject.getSquare(index).getEffectVal()).makeDecision();
+					if(players[numPlayer].getIsAI() == true) {
+						decisionMade = computerRandom();
+					}
+					else {
+						decisionMade = decisions.get(boardObject.getSquare(index).getEffectVal()).makeDecision();
+					}
+
+	
 					if (decisionMade == 1) {
 						decisionEffects(decisions.get(boardObject.getSquare(index).getEffectVal()).getEffg1(), decisions.get(boardObject.getSquare(index).getEffectVal()).getEffs1(), players[numPlayer]);
 					}
