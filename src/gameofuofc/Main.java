@@ -14,15 +14,18 @@ import java.util.Collections;
 import java.util.Scanner;
 
 
+
 public class Main{
 		
+
+// Main instance variables
+
 		public static Board boardObject = new Board();
 		static Player playerObject = new Player(0, "Johnny");
 		static Player player1Object = new Player(1, "Joestar");
 		public static Player[] players = {playerObject, player1Object};
 		public static int currentPlayer = 0;
 		static int selection;
-		static Scanner playerin = new Scanner(System.in);
 		static int ModulusCounter = 2;
 		static int checkPlayer = 0;
 		static int decisionMade = 0;
@@ -32,29 +35,44 @@ public class Main{
 		
 		public static void main(String[] args) throws IOException {
 
-			
+
+//By default, both players start at square 0, unless another game is loaded later on
+
 			playerObject.setPlayerLocation(boardObject.getSquare(0));
 			
 			player1Object.setPlayerLocation(boardObject.getSquare(0));
 
 			initializeDecisions();
 			shuffleWildcards();
+
+//Open input scanner
+			Scanner playerin = new Scanner(System.in);
 			
+//Starting messages
 			System.out.println("Welcome to the game of UOFC! ");
 			System.out.println("Press '1' to continue ");
 			System.out.println("or input '2' to load a game");
+			
+// If loading a game, the players from the save file (along with all their stats) replace the players in the current game
 			if (playerin.nextInt() == 2) {
 				ArrayList<Player> TempArrList4Load = new ArrayList<Player>();
 				TempArrList4Load = serializeDataIn();
 				players[0] = TempArrList4Load.get(0);
 				players[1] = TempArrList4Load.get(1);		
+			} else {			
+				inputPlayerNames();
 			}
+
 
 			players[0].setPlayerName("htet");
 			players[1].setPlayerName("tin");
 			
 			
 			
+
+						
+//Main gameplay code
+
 			while(seeIfBothPlayersFinished() ==  false) {
 				currentPlayer = choosePlayer();
 				currentPlayer = seeIfPlayerFinished(currentPlayer);
@@ -69,12 +87,15 @@ public class Main{
 						printPlayersStats();
 					}
 					if(selection == 3) {
+						// Export info about each player in the game into object.txt
 						ArrayList<Player> TempArrList = new ArrayList<Player>();
 						TempArrList.add(players[0]);
 						TempArrList.add(players[1]);
 						dataout(TempArrList);
 					}
 				}
+				
+				//Show where the current player is at
 				System.out.println("---------------------------------------");
 				movePlayer(currentPlayer, spin());
 				System.out.print(players[currentPlayer].getName() + " is currently at ");
@@ -88,7 +109,7 @@ public class Main{
 					}
 				
 			
-		
+		//Spin method, returns a random integer
 		public static int spin() {
 			int min = 1;
 			int max = 6;
@@ -97,12 +118,13 @@ public class Main{
 			// Source for random integer generator: https://www.educative.io/edpresso/how-to-generate-random-numbers-in-java 
 		}
 		
+		//Method for moving players
 		public static void movePlayer(int numPlayer, int numMove) {
 			int moveLoc;    // location to move
 			
 			moveLoc = players[numPlayer].getPlayerLocation().getSquareId() + numMove; // location to move = current location + distance to move
 			for(int index = players[numPlayer].getPlayerLocation().getSquareId(); index < moveLoc;index++) {
-				if (boardObject.getSquare(index).getType() == 'd') {
+				if (boardObject.getSquare(index).getType() == 'd') {   // check if landed on a decision spot
 					System.out.println("You have arrived at a decison spot");
 					decisionMade = decisions.get(boardObject.getSquare(index).getEffectVal()).makeDecision();
 					if (decisionMade == 1) {
@@ -112,14 +134,14 @@ public class Main{
 						decisionEffects(decisions.get(boardObject.getSquare(index).getEffectVal()).getEffg2(), decisions.get(boardObject.getSquare(index).getEffectVal()).getEffs2(), players[numPlayer]);
 					}
 				} 
-				if (boardObject.getSquare(index).getType() == 'e') {
+				if (boardObject.getSquare(index).getType() == 'e') {   // check if the end has been reached
 					System.out.println(players[numPlayer].getName() + " has reached the finish point");
 					players[numPlayer].setPlayerLocation(boardObject.getSquare(index));
 					return;
 				}
 			}
 			players[numPlayer].setPlayerLocation(boardObject.getSquare(moveLoc));
-			switch (players[numPlayer].getPlayerLocation().getType()) {
+			switch (players[numPlayer].getPlayerLocation().getType()) {    // cases for different square types
 			case 'g':
 				//call method to add to or subtract from grade metric
 				players[numPlayer].setPlayerGrades(players[numPlayer].getGrades() + boardObject.getSquare(moveLoc).getEffectVal());
@@ -144,7 +166,7 @@ public class Main{
 			
 		}	
 		
-		
+		//Method for wild cards, also applies the effects on the player
 		public static void drawCard(int numPlayer) {
 			wildcards drawn = new wildcards("", 'd', 0);
 			Collections.shuffle(wildcards);
@@ -168,7 +190,8 @@ public class Main{
 				break;
 			}
 		}
-		public static void initializeDecisions(){
+		
+		public static void initializeDecisions(){   // Initializes the decisions csv file
     		try {
         	InputStream csvFile = new FileInputStream("csvfiles/decisions.csv");
         	Scanner myReader = new Scanner(new InputStreamReader(csvFile));
@@ -183,10 +206,10 @@ public class Main{
     		} catch (FileNotFoundException e) {
         System.out.println("An error occurred.");
     	}
-    		// this code is copied from my hackathon app
+    		// this code is copied from my hackathon app - Htet
 	}
 		
-		public static void shuffleWildcards(){
+		public static void shuffleWildcards(){  // shuffles the wildcards
     		try {
         	InputStream csvFile = new FileInputStream("csvfiles/wildcards.csv");
         	Scanner myReader = new Scanner(new InputStreamReader(csvFile));
@@ -205,7 +228,7 @@ public class Main{
     		// this code is copied from my hackathon app
 	}
 		
-		public static int choosePlayer() {
+		public static int choosePlayer() {  // returns which player is currently playing
 
 		
 			checkPlayer = ModulusCounter % 2;
@@ -221,7 +244,7 @@ public class Main{
 		
 		
 	}
-	public static int seeIfPlayerFinished(int player) {
+	public static int seeIfPlayerFinished(int player) {  // checks if a player has finished
 		
 		if(players[player].getPlayerLocation().getType() == 'e') {
 			return choosePlayer();
@@ -234,7 +257,7 @@ public class Main{
 				
 }
 	
-	public static boolean seeIfBothPlayersFinished() {
+	public static boolean seeIfBothPlayersFinished() {  // checks if both players have finished
 		for (int counter = 0; counter < players.length; counter ++) {
 			if (players[counter].getPlayerLocation().getType() != 'e') {
 				return false;
@@ -243,7 +266,7 @@ public class Main{
 		return true;
 	}
 	
-	public static void printPlayersStats() {
+	public static void printPlayersStats() {  // prints the stats for all players
 		for (Player i : players) {
 			System.out.println("Stats for player " + i.getName() + " (playerID = " + i.getPlayerId() + ") :" );
 			System.out.println("Currently on square " + i.getPlayerLocation().getSquareId());
@@ -253,7 +276,7 @@ public class Main{
 		}
 	}
 	
-	public static Player seeWhoWon() {
+	public static Player seeWhoWon() {  // sees who won, by comparing the total social/grades scores. If there has been a tie, then the winner is randomly chosen.
 		int player0Total = 0;
 		int player1Total = 0;
 		
@@ -285,7 +308,7 @@ public class Main{
 		
 	}
 	
-	public static void decisionEffects(int eff1, int eff2, Player playerobj) {
+	public static void decisionEffects(int eff1, int eff2, Player playerobj) {  // deals with the effects of decisions
 		playerobj.setPlayerSocial(playerobj.getSocial() + eff1);
 		playerobj.setPlayerGrades(playerobj.getGrades() + eff2);
 		System.out.println(Integer.toString(eff1) + " has been added to social");
@@ -293,7 +316,8 @@ public class Main{
 	}
 
 
-	public static boolean checkFileExists() throws ClassNotFoundException  {
+	public static boolean checkFileExists() throws ClassNotFoundException  { // checks if the object.txt file exists
+
 		   try {
 			   String fileName = "object.txt";
 			   FileInputStream fin = new FileInputStream(fileName);
@@ -310,7 +334,7 @@ public class Main{
 		}
 	}
 	
-	public static void dataout(ArrayList<Player> people) throws IOException {
+	public static void dataout(ArrayList<Player> people) throws IOException {  // when saving, exports the data of the players into object.txt
 		try {
 		String fileName = "object.txt";
 		FileOutputStream fos = new FileOutputStream(fileName);
@@ -326,7 +350,7 @@ public class Main{
 	}
 
 	
-	public static ArrayList<Player> serializeDataIn(){
+	public static ArrayList<Player> serializeDataIn(){   // when loading, imports the data from object.txt into the game
 		   String fileName= "object.txt";
 		   ArrayList<Player> people= new ArrayList<Player>();
 		   try {
@@ -347,8 +371,15 @@ public class Main{
 		   return null;
 		}
 	
-	public static void playerName(int playerID) {
-		String input = playerin.nextLine();
-		players[playerID].setPlayerName(input);
+	public static void inputPlayerNames() {  // takes player input + sets player names based on inputs
+		Scanner playernamein = new Scanner(System.in);
+
+		for (int i = 0; i < players.length; i++) {
+
+			System.out.println("Input the name for player " + (i+1));
+			String input = playernamein.nextLine();
+			players[i].setPlayerName(input);
+		}
 	}
+	
 }
