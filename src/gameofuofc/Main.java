@@ -396,7 +396,7 @@ public class Main{
 			System.out.println("Input the name for player " + (i+1));
 			String input = playernamein.nextLine();
 			if(input.equals("")) {
-				players[i].setPlayerName("Computer 1");
+				players[i].setPlayerName(players[i].randomBot());
 				players[i].setIsAI(true);
 			}
 			else {

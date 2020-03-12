@@ -13,6 +13,8 @@ public class Player implements Serializable {
 	private int Grades;
 	private int Social;
 	private boolean isAI;
+	private String[] bots = {"Bot Htet", "Bot Tin", "Bot Mohommad", "Bot Roubert", "Bot Nick", "Bot Yang"};
+	
 	public Player(int id, String name) {
 		this.playerID = id;
 		this.playerName = name;
@@ -20,8 +22,13 @@ public class Player implements Serializable {
 		this.Social = 0;
 		playerLocation = new Square();
 	}
-	
-	
+	//Determines which bot out of our list to play
+	public String randomBot() {
+		int min = 0;
+		int max = 5;
+		int randomInt = (int)(Math.random() * (max - min + 1) + min);
+		return bots[randomInt];	
+	}
 
 	
 	//Getters
