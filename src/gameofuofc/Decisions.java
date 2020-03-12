@@ -12,6 +12,7 @@ private int effg2;
 private int effs2;
 private Scanner playerin = new Scanner(System.in);
 private int choice;
+
 	public Decisions(String newDesc, String newOp1,int effg1, int effs1,String newOp2,int effg2, int effs2) {
 		this.Desc = newDesc;
 		this.Op1 = newOp1;
@@ -20,6 +21,15 @@ private int choice;
 		this.Op2 = newOp2;
 		this.effg2 = effg2;
 		this.effs2 = effs2;
+	}
+	public Decisions(Decisions tocopy) {
+		this.Desc = tocopy.getDesc();
+		this.Op1 = tocopy.getOp1();
+		this.Op2 = tocopy.getOp2();
+		this.effg1 = tocopy.getEffg1();
+		this.effg2 = tocopy.getEffg2();
+		this.effs1 = tocopy.getEffs1();
+		this.effs2 = tocopy.getEffs2();
 	}
 	public int makeDecision() {
 		System.out.println(Desc);
@@ -32,6 +42,15 @@ private int choice;
 			return 2;
 		}
 		return 0;
+	}
+	public String getDesc() {
+		return Desc;
+	}
+	public String getOp1() {
+		return Op1;
+	}
+	public String getOp2() {
+		return Op2;
 	}
 	public int getEffg1(){
 		return effg1;

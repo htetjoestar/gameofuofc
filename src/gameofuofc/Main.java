@@ -13,18 +13,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
-public class Main extends Application {
+public class Main{
 		
 		public static Board boardObject = new Board();
-		static Player playerObject = new Player(0, "");
-		static Player player1Object = new Player(1, "");
-		static Player[] players = {playerObject, player1Object};
+		static Player playerObject = new Player(0, "Johnny");
+		static Player player1Object = new Player(1, "Joestar");
+		public static Player[] players = {playerObject, player1Object};
 		public static int currentPlayer = 0;
 		static int selection;
 		static Scanner playerin = new Scanner(System.in);
@@ -34,16 +29,10 @@ public class Main extends Application {
 		static ArrayList<wildcards> wildcards = new ArrayList<wildcards>();
 		static ArrayList<Decisions> decisions = new ArrayList<Decisions>();
 		
-		public void start(Stage primaryStage) throws Exception {
-			Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-			primaryStage.setTitle("Hello World");
-			primaryStage.setScene(new Scene(root, 600, 400));
-			primaryStage.show();
-		}
 		
 		public static void main(String[] args) throws IOException {
 
-
+			
 			playerObject.setPlayerLocation(boardObject.getSquare(0));
 			
 			player1Object.setPlayerLocation(boardObject.getSquare(0));
@@ -63,7 +52,9 @@ public class Main extends Application {
 
 			players[0].setPlayerName("htet");
 			players[1].setPlayerName("tin");
-			launch(args);
+			
+			
+			
 			while(seeIfBothPlayersFinished() ==  false) {
 				currentPlayer = choosePlayer();
 				currentPlayer = seeIfPlayerFinished(currentPlayer);
