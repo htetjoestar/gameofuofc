@@ -1,6 +1,6 @@
 # The Game Of UofC
 # CPSC 233 Lecture 2 Group 06-03
-# As of 2020/02/27
+# As of 2020/03/12
 # Repository link: https://github.com/htetjoestar/gameofuofc/
 #
 # How to run the game:
