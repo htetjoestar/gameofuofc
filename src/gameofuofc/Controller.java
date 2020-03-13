@@ -2,6 +2,8 @@ package gameofuofc;
 
 
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,11 +12,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
 public class Controller extends Main{
     @FXML
     private Label TurnLabel;
+    @FXML
+    static private ImageView boardpic;
 
     @FXML
     private Button RollButton;
