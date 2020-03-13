@@ -21,7 +21,7 @@ public class Main{
 // Main instance variables
 
 		public static Board boardObject = new Board();
-		public static Player[] players = {new Player(0, null), new Player(1, null)};
+		public static Player[] players = {null, null};
 		public static int currentPlayer = 0;
 		static int selection;
 		static int ModulusCounter = 2;
