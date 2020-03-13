@@ -65,12 +65,12 @@ public class DecisionAlert {
     }
     @FXML
     void closeWindow(ActionEvent event) {
-    	val = 1;
+    	val = 2;
     	window.close();
     }
     @FXML
     void op1effs(ActionEvent event) {
-    	val = 0;
+    	val = 1;
     	window.close();
     }
 }

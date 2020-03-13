@@ -21,9 +21,7 @@ public class Main{
 // Main instance variables
 
 		public static Board boardObject = new Board();
-		static Player playerObject = new Player(0, "Johnny");
-		static Player player1Object = new Player(1, "Joestar");
-		public static Player[] players = {playerObject, player1Object};
+		public static Player[] players = {new Player(0, null), new Player(1, null)};
 		public static int currentPlayer = 0;
 		static int selection;
 		static int ModulusCounter = 2;
@@ -38,9 +36,6 @@ public class Main{
 
 //By default, both players start at square 0, unless another game is loaded later on
 
-			playerObject.setPlayerLocation(boardObject.getSquare(0));
-			
-			player1Object.setPlayerLocation(boardObject.getSquare(0));
 
 			initializeDecisions();
 			shuffleWildcards();
@@ -63,7 +58,9 @@ public class Main{
 				inputPlayerNames();
 			}
 
-
+			players[0].setPlayerLocation(boardObject.getSquare(0));
+			
+			players[1].setPlayerLocation(boardObject.getSquare(0));
 		
 			
 
