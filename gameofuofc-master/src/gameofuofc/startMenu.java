@@ -79,14 +79,12 @@ public class startMenu extends Application {
 			   			if(pl2Name.equalsIgnoreCase("")) {
 			   				aiExists=1;
 			   				player2.setIsAI(true);
-			   				player2.setPlayerName(player2.randomBot());
-			   				playerNames.add(player2);
 			   				primaryStage.close();
 			   			}
 			   			//If player 2 is not blank, AI is not triggered. 
 			   			else {
-			   				//player1.setPlayerName(pl1Name);
-				   			//playerNames.add(player1);
+			   				player1.setPlayerName(pl1Name);
+				   			playerNames.add(player1);
 				   			player2.setPlayerName(pl2Name);
 				   			playerNames.add(player2);
 			   				primaryStage.close();
