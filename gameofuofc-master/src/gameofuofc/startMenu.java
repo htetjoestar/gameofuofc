@@ -29,6 +29,7 @@ public class startMenu extends Application {
 	/**
 	* The method display() displays all the features, which were organized in GridPane.
 	* @param Nothing
+	* @throws Exception 
 	* @return variable of type ArrayList<Player>
 	*/
 	
@@ -70,6 +71,7 @@ public class startMenu extends Application {
 		   primaryStage.setScene(scene);
 		
 		   // This method contains the event handler class for start button.
+		   
 		   start.setOnAction(new EventHandler<ActionEvent>()
 		   {		   
 			   	/**
