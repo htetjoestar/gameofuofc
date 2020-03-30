@@ -28,8 +28,9 @@ public class endScreen {
 	
     /** 
     * The method showEnd(String awinner) launches the display that the game has ended. 
-    * It contains a button that would reveal the winner. It takes winner of type String, 
-    * throws IOException, and returns nothing.
+    * It contains a button that would reveal the winner. It throws IOException.
+    * @param variable of type String 
+    * @return Nothing
     */
 	
     void showEnd(String awinner) throws IOException {
@@ -39,8 +40,7 @@ public class endScreen {
 		window.showAndWait();
     }
 	
-    // This method handles the event at which the button has been clicked and reveals 
-    // the winner. 
+    // This method handles the event at which the button has been clicked and reveals the winner. 
     @FXML
     void reveal(ActionEvent event) {
     	textbox.setText(winner + " has won!");
