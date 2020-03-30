@@ -14,7 +14,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-
+/**
+* The class DecisionAlert contains methods that notify the user when they've landed 
+* on a decision spot, which asks them a question and gives them choices. Each choice
+* affects their social and grades bars differently. 
+*/
 
 public class DecisionAlert {
 	
@@ -38,10 +42,21 @@ public class DecisionAlert {
     static private Decisions tobe;
     static private int val;
     static Stage window = new Stage();
+
+    /** 
+    * The method initialize() notifies the user when they have landed on a decision spot 
+    * and gives them options. It has no parameters and returns nothing. 
+    */
     @FXML
     void initialize() {
     	desc.setText("You have landed on the Decision. Click ->");
     }
+	/**
+	* The display(Decisions theDe) is an internal class that launches the decisions screen. 
+	* It has theDe of type Decisions as a single parameter and returns an integer, which 
+	* represents a decision. 
+	*/
+	
 	public int display(Decisions theDe) throws IOException {
 			tobe = new Decisions(theDe);
 	    	
@@ -50,7 +65,13 @@ public class DecisionAlert {
      		window.showAndWait();
      		return val;
 	}
-
+	
+    /** 
+    * The method Show(Action event) handles the event at which a button has been clicked 
+    * to reveal the question and options. It takes event of type action as a parameter and 
+    * returns nothing. 
+    */
+		
     @FXML
     void Show(ActionEvent event) {
     	
@@ -63,11 +84,23 @@ public class DecisionAlert {
     	showBtn.setVisible(false);
     	btn.setVisible(true);
     }
+	
+    /**
+    * The method closeWindow(ActionEvent event) handles the event at which the user 
+    * selected option 2. It takes event of type ActionEvent and returns nothing.
+    */
+	
     @FXML
     void closeWindow(ActionEvent event) {
     	val = 2;
     	window.close();
     }
+	
+    /**
+    * The method op1effs(ActionEvent event) handles the event at which the user 
+    * selected option 1. It takes event of type ActionEvent and returns nothing.
+    */
+	
     @FXML
     void op1effs(ActionEvent event) {
     	val = 1;
