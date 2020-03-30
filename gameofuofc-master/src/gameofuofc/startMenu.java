@@ -27,9 +27,9 @@ public class startMenu extends Application {
 	   Player player2=new Player(1, null);
 	
 	/**
-	* The method display() has no parameters and returns a list of players of type ArrayList<Player>
-	* that will be given to the main class. This method displays all the features, which were organized
-	* in GridPane.
+	* The method display() displays all the features, which were organized in GridPane.
+	* @param Nothing
+	* @return variable of type ArrayList<Player>
 	*/
 	
 	public ArrayList<Player> display() throws Exception
@@ -74,10 +74,10 @@ public class startMenu extends Application {
 		   {		   
 			   	/**
 				* The class handle(ActionEvent event) is an internal event handler class for 
-				* the START button. It takes in event, a variable of type ActionEvent, which is 
-				* passed through everytime the START button is clicked. It checks if any player 
-				* names were entered, and if the user wants to play against an AI. 
-				* It returns nothing. 
+				* the START button. It checks if any player names were entered, and if the 
+				* user wants to play against an AI. 
+				* @param variable of type ActionEvent
+				* @return Nothing
 				*/
 			   
 			   	@Override
@@ -122,7 +122,8 @@ public class startMenu extends Application {
 				* This method handle (ActionEvent event) handles events for the LOAD button. 
 				* When clicked, it calls for an old list of player names, which will tell 
 				* the main class to load a previous game with those players. 
-				* It returns nothing. 
+				* @param variable of type ActionEvent
+				* @return Nothing
 				*/
 			   
 			   	@Override
@@ -137,8 +138,8 @@ public class startMenu extends Application {
 		   primaryStage.showAndWait();
 		   return playerNames;
 		
-	   }
-
+	}
+	
 	@Override
 	public void start(Stage arg0) throws Exception {
 		// TODO Auto-generated method stub
