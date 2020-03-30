@@ -25,6 +25,13 @@ public class startMenu extends Application {
 	ArrayList<Player> playerNames = new ArrayList<>(); 
 	   Player player1=new Player(0, null);
 	   Player player2=new Player(1, null);
+	
+	/**
+	* The method display() has no parameters and returns a list of players of type ArrayList<Player>
+	* that will be given to the main class. This method displays all the features, which were organized
+	* in GridPane.
+	*/
+	
 	public ArrayList<Player> display() throws Exception
 	   {
 		   
@@ -35,21 +42,19 @@ public class startMenu extends Application {
 		   TextField txtPl2; 
 		   Label message; 
 		   
-
-		   
-//		   Setting up the screen using GridPane 
+		   // Setting up the screen using GridPane 
 		   GridPane layout= new GridPane();
 		   layout.setVgap(10);
 		   layout.setHgap(10);		   
 		   layout.add(new Label("Welcome Dino!"),1,0);
 		  
-//		   Creating input boxes for player names. 
+		   // Creating input boxes for player names. 
 		   txtPl1 = new TextField(""); // Default text of 0
 		   txtPl1.setPrefWidth(200);
 		   txtPl2 = new TextField("");
 		   txtPl2.setPrefWidth(200);
 		   
-//		   Adding the text box and button onto the screen.
+		   // Adding the text box and button onto the screen.
 		   layout.add(new Label("Enter Player 1"),1,1);
 		   layout.add(new Label("Enter Player 2"),1,2);
 		   layout.add(new Label("Leave Player 2 blank to verse PC."),1,3);
@@ -64,9 +69,17 @@ public class startMenu extends Application {
 		   primaryStage.setTitle("Game of University of Calgary");
 		   primaryStage.setScene(scene);
 		
-// 	       Set the event handler when the START button is clicked
+		   // This method contains the event handler class for start button.
 		   start.setOnAction(new EventHandler<ActionEvent>()
 		   {		   
+			   	/**
+				* The class handle(ActionEvent event) is an internal event handler class for 
+				* the START button. It takes in event, a variable of type ActionEvent, which is 
+				* passed through everytime the START button is clicked. It checks if any player 
+				* names were entered, and if the user wants to play against an AI. 
+				* It returns nothing. 
+				*/
+			   
 			   	@Override
 			   	public void handle(ActionEvent event)
 			   	{
@@ -102,9 +115,16 @@ public class startMenu extends Application {
 		   }
 		   );
 		   
-		// Set the event handler when the LOAD button is clicked
+		   // Set the event handler when the LOAD button is clicked
 		   load.setOnAction(new EventHandler<ActionEvent>()
 		   {		   
+			   	/** 
+				* This method handle (ActionEvent event) handles events for the LOAD button. 
+				* When clicked, it calls for an old list of player names, which will tell 
+				* the main class to load a previous game with those players. 
+				* It returns nothing. 
+				*/
+			   
 			   	@Override
 			   	public void handle(ActionEvent event)
 			   	{
