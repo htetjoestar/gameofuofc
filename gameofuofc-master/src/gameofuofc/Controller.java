@@ -1,6 +1,8 @@
 package gameofuofc;
 
-
+/**
+ * The Controller class connects the GUI/display and the rest of the program.
+ */
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -66,6 +68,10 @@ public class Controller extends Main{
 	static int decisionMade = 0;
 	ArrayList<Player> temp = new ArrayList<Player>();
 	@FXML
+	
+	/**
+	 * The initialize() method sets up the GUI. Sets some labels to the players' names.
+	 */
 	void initialize()  {
 		initializeDecisions();
 		shuffleWildcards();
@@ -88,6 +94,11 @@ public class Controller extends Main{
 		currentPlayer = seeIfPlayerFinished(currentPlayer);
 	}
 	@FXML
+	
+	/**
+	 * Roll() method. Applies when a player rolls/spins. Sets labels so the user knows what's going on.
+	 * @param event
+	 */
 	void Roll(ActionEvent event) {
 		if(super.seeIfBothPlayersFinished() ==  false) {
 			this.movePlayerS(currentPlayer, super.spin());
@@ -113,6 +124,9 @@ public class Controller extends Main{
 		savedtxt.setVisible(false);	
 	}
 	
+	/**
+	 * updateStats() method. Updates the players' stats in the GUI.
+	 */
 	public void updateStats(){
 		p1square.setText("Location: " + Integer.toString(players[0].getPlayerLocation().getSquareId()));
 		p1grades.setText("Grades: " + Integer.toString(players[0].getGrades()));
@@ -122,6 +136,11 @@ public class Controller extends Main{
 		p2social.setText("Social: " + Integer.toString(players[1].getSocial()));
 	}
 	
+	/**
+	 * movePlayerS() method. Applies when a player moves, and calls relevant methods when a player lands on different types of squares.
+	 * @param numPlayer the player's id
+	 * @param numMove the number of squares the player will move
+	 */
 	public void movePlayerS(int numPlayer, int numMove) {
 		int moveLoc;    // location to move
 		
@@ -177,6 +196,11 @@ public class Controller extends Main{
 			break;
 		}
 }
+	
+	/**
+	 * drawCard() method. Applies when a player lands on a wildcard. Displays that wildcard being drawn, and updates corresponding player stats.
+	 * @param numPlayer player's id
+	 */
 	public static void drawCard(int numPlayer) {
 		wildcards drawn = new wildcards("", 'd', 0);
 		Collections.shuffle(wildcards);
@@ -220,6 +244,10 @@ public class Controller extends Main{
 			break;
 		}}
 	}
+	
+	/** seeWhoWon() method. Displays who won.
+	 * @return the Player who won
+	 */
 	public static Player seeWhoWon() {  // sees who won, by comparing the total social/grades scores. If there has been a tie, then the winner is randomly chosen.
 		int player0Total = 0;
 		int player1Total = 0;
@@ -249,6 +277,11 @@ public class Controller extends Main{
 		
 	}
 
+	/**
+	 * save() method. Displays when the game is saved.
+	 * @param event 
+	 * @throws IOException
+	 */
     @FXML
     void save(ActionEvent event) throws IOException {
     	ArrayList<Player> temp = new ArrayList<Player>();
