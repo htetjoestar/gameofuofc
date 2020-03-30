@@ -3,9 +3,7 @@ import java.io.Serializable;
 //import java.math.*;
 
 public class Player implements Serializable {
-	/**
-	 * 
-	 */
+// Players instance variables
 	private static final long serialVersionUID = 1L;
 	private int playerID;
 	private String playerName;
@@ -15,6 +13,13 @@ public class Player implements Serializable {
 	private boolean isAI;
 	private String[] bots = {"Bot Htet", "Bot Tin", "Bot Mohommad", "Bot Roubert", "Bot Nick", "Bot Yang"};
 	
+	
+	/**
+	 * Constructor for creating a player
+	 * @param id, gives the player its ID number which is unique for every player
+	 * @param name, gives the player its name
+	 */
+	
 	public Player(int id, String name) {
 		this.playerID = id;
 		this.playerName = name;
@@ -22,7 +27,13 @@ public class Player implements Serializable {
 		this.Social = 0;
 		playerLocation = new Square();
 	}
+	
 	//Determines which bot out of our list to play
+	/** 
+	 * Method for selecting a bot
+	 * @return the bots name which is selected
+	 */
+	
 	public String randomBot() {
 		int min = 0;
 		int max = 5;
