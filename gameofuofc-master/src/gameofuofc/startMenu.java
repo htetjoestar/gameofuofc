@@ -15,7 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 /**
-* The class startMenu simply displays a start menu for the game. 
+* The class startMenu contains methods that display and handle a start menu for the game. 
 * It contains a welcome message, two text boxes for player 1 and player 2, 
 * a button to start a new game, and another button to load a previous game.
 * The start menu also gives the user the option to play against an AI. 
