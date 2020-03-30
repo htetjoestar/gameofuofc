@@ -26,7 +26,8 @@ public class endScreen {
     static String winner;
     Stage window = new Stage();
 	
-    /** The method showEnd(String awinner) launches the display that the game has ended. 
+    /** 
+    * The method showEnd(String awinner) launches the display that the game has ended. 
     * It contains a button that would reveal the winner. It takes winner of type String, 
     * throws IOException, and returns nothing.
     */
