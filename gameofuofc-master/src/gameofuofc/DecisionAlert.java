@@ -56,6 +56,7 @@ public class DecisionAlert {
 	/**
 	* The display(Decisions theDe) is an internal class that launches the decisions screen. 
 	* @param variable of type Decisions 
+	* @throws IOException 
 	* @return integer, which represents an option 
 	*/
 	
