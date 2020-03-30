@@ -16,8 +16,8 @@ public class Player implements Serializable {
 	
 	/**
 	 * Constructor for creating a player
-	 * @param id, gives the player its ID number which is unique for every player
-	 * @param name, gives the player its name
+	 * @param id gives the player its ID number which is unique for every player
+	 * @param name gives the player its name
 	 */
 	
 	public Player(int id, String name) {
