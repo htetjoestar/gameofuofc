@@ -31,7 +31,6 @@ public class endScreen {
     * It contains a button that would reveal the winner. It throws IOException.
     * @param variable of type String 
     * @throws IOException 
-    * @return Nothing
     */
 	
     void showEnd(String awinner) throws IOException {
@@ -43,8 +42,7 @@ public class endScreen {
 	
     /** 
     * This method handles the event at which the button has been clicked and reveals the winner. 
-    * @parm variable of type ActionEvent 
-    * @return Nothing 
+    * @param variable of type ActionEvent  
     */
 	
     @FXML

@@ -33,10 +33,10 @@ public class Board {
 	
 	/**
 	 * The constructor creates a board using the information in the board csv file. It then adds all the squares in the csv into the squares ArrayList, which is essentially the game's board.
-	 * @param None
-	 * @return nothing
+	 * @param index ID of the square
+	 * @return Square of ID:index
 	 */
-	
+
 	public Square getSquare(int index) {
 		return squares.get(index);
 	}

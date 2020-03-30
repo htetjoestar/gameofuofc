@@ -29,10 +29,17 @@ public class wildcardHandler {
     static String effects;
     static String value;
     @FXML
+    /**
+     * Initializes the window. Prepares the text
+     */
     void initialize() {
     	effText.setText("");
     	resolve.setVisible(false);
     }
+    /**
+     * This method displays the wildcard prompt whenever a player lands on a wildcard
+     * @throws IOException
+     */
     public void display(String adisplaytext, String aeffects, String avalue) throws IOException{
 		Parent root = FXMLLoader.load(Main.class.getResource("wildcardAlert.fxml"));
 		displayText = adisplaytext;
@@ -43,11 +50,19 @@ public class wildcardHandler {
     }
     
     @FXML
+    /**
+     * button handler that closes the window
+     * @param event
+     */
     void closewindow(ActionEvent event) {
     	window.close();
     }
 
     @FXML
+    /**
+     * Button handler that shows the text of a wildcard
+     * @param event
+     */
     void drawtheCard(ActionEvent event) {
     	resolve.setVisible(true);
     	drawCard.setVisible(false);

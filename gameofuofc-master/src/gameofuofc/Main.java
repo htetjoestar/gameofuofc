@@ -13,8 +13,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-
-
+/**
+ * The Main Class. This class sets up the board, wilcards and decisions as well as 
+ * setting up and running that text based version of the game
+ *
+ */
 public class Main{
 		
 
@@ -108,7 +111,10 @@ public class Main{
 					}
 				
 			
-		//Spin method, returns a random integer
+		/**
+		 * Spin method, returns a random integer
+		 * @return A randomly generated number between 1 and 6
+		 */
 		public static int spin() {
 			int min = 1;
 			int max = 6;
@@ -116,7 +122,10 @@ public class Main{
 			return randomInt;		
 			// Source for random integer generator: https://www.educative.io/edpresso/how-to-generate-random-numbers-in-java 
 		}
-		
+		/**
+		 * Used by a computer player to make a decision at a Decision spot
+		 * @return A randomly generated number between 1 and 2
+		 */
 		public static int computerRandom() {
 			int min = 1;
 			int max = 2;
@@ -125,6 +134,13 @@ public class Main{
 		}
 		
 		//Method for moving players
+		/**
+		 * Method used to move players while checking for end square and required stop spots
+		 * <p>
+		 * Also used to apply the effects of booster squares and decision spots
+		 * @param numPlayer ID of the player moving
+		 * @param numMove Number of moves that the player will make
+		 */
 		public static void movePlayer(int numPlayer, int numMove) {
 			int moveLoc;    // location to move
 			
@@ -179,7 +195,10 @@ public class Main{
 			
 		}	
 		
-		//Method for wild cards, also applies the effects on the player
+		/**
+		 * Method for wild cards, also applies the effects on the player
+		 * @param numPlayer ID of player currently playing
+		 */
 		public static void drawCard(int numPlayer) {
 			wildcards drawn = new wildcards("", 'd', 0);
 			Collections.shuffle(wildcards);
@@ -203,7 +222,9 @@ public class Main{
 				break;
 			}
 		}
-		
+		/**
+		 * Reads data from the Decisions csv file and puts them into the decisions ArrayList
+		 */
 		public static void initializeDecisions(){   // Initializes the decisions csv file
     		try {
         	InputStream csvFile = new FileInputStream("csvfiles/decisions.csv");
@@ -221,7 +242,9 @@ public class Main{
     	}
     		// this code is copied from my hackathon app - Htet
 	}
-		
+		/**
+		 * Reads data from the Wildcards csv file and puts them into the Wildcards ArrayList and shuffles it
+		 */
 		public static void shuffleWildcards(){  // shuffles the wildcards
     		try {
         	InputStream csvFile = new FileInputStream("csvfiles/wildcards.csv");
@@ -240,7 +263,10 @@ public class Main{
     	}
     		// this code is copied from my hackathon app
 	}
-		
+		/**
+		 * Method for choosing the player's turn
+		 * @return ID of the player
+		 */
 		public static int choosePlayer() {  // returns which player is currently playing
 
 		
@@ -257,6 +283,11 @@ public class Main{
 		
 		
 	}
+		/**
+		 * Method to check if a player has finished
+		 * @param player Player to be checked
+		 * @return A player that has not finished the game
+		 */
 	public static int seeIfPlayerFinished(int player) {  // checks if a player has finished
 		
 		if(players[player].getPlayerLocation().getType() == 'e') {
@@ -269,7 +300,10 @@ public class Main{
 		return currentPlayer;
 				
 }
-	
+	/**
+	 * Method to check if both players have finished
+	 * @return true when both players have finished; otherwise it returns false
+	 */
 	public static boolean seeIfBothPlayersFinished() {  // checks if both players have finished
 		for (int counter = 0; counter < players.length; counter ++) {
 			if (players[counter].getPlayerLocation().getType() != 'e') {
@@ -278,7 +312,9 @@ public class Main{
 		}
 		return true;
 	}
-	
+	/**
+	 * This method prints the stats for all players
+	 */
 	public static void printPlayersStats() {  // prints the stats for all players
 		for (Player i : players) {
 			System.out.println("Stats for player " + i.getName() + " (playerID = " + i.getPlayerId() + ") :" );
@@ -288,7 +324,10 @@ public class Main{
 			System.out.println("");
 		}
 	}
-	
+	/**
+	 * This method calculates the scores of both players to find the winner
+	 * @return The winner of the game
+	 */
 	public static Player seeWhoWon() {  // sees who won, by comparing the total social/grades scores. If there has been a tie, then the winner is randomly chosen.
 		int player0Total = 0;
 		int player1Total = 0;
@@ -320,7 +359,12 @@ public class Main{
 		return null;
 		
 	}
-	
+	/**
+	 * Prints the effects of a decision a player has made
+	 * @param eff1 The effect on a player's social
+	 * @param eff2 The effect on a player's grade
+	 * @param playerobj the player who has made the decision
+	 */
 	public static void decisionEffects(int eff1, int eff2, Player playerobj) {  // deals with the effects of decisions
 		playerobj.setPlayerSocial(playerobj.getSocial() + eff1);
 		playerobj.setPlayerGrades(playerobj.getGrades() + eff2);
@@ -328,7 +372,11 @@ public class Main{
 		System.out.println(Integer.toString(eff2) + " has been added to grades");
 	}
 
-
+ /**
+  * The methods checks to see if a save file exists
+  * @return true if a save file exists, false otherwise
+  * @throws ClassNotFoundException Class not found exception throw
+  */
 	public static boolean checkFileExists() throws ClassNotFoundException  { // checks if the object.txt file exists
 
 		   try {
@@ -346,7 +394,11 @@ public class Main{
 			return false;		//RETURN FALSE WHEN FILE DOES NOT EXIST
 		}
 	}
-	
+	/**
+	 * Saves game data to a txt file 
+	 * @param people Arraylist containing player information
+	 * @throws IOException IO exception when failure to read file
+	 */
 	public static void dataout(ArrayList<Player> people) throws IOException {  // when saving, exports the data of the players into object.txt
 		try {
 		String fileName = "object.txt";
@@ -362,7 +414,10 @@ public class Main{
 		
 	}
 
-	
+	/**
+	 * Reads save data from a txt file
+	 * @return Player data read from a save file
+	 */
 	public static ArrayList<Player> serializeDataIn(){   // when loading, imports the data from object.txt into the game
 		   String fileName= "object.txt";
 		   ArrayList<Player> people= new ArrayList<Player>();
@@ -383,7 +438,9 @@ public class Main{
 		}
 		   return null;
 		}
-	
+	/**
+	 *  takes player input + sets player names based on inputs
+	 */
 	public static void inputPlayerNames() {  // takes player input + sets player names based on inputs
 		Scanner playernamein = new Scanner(System.in);
 

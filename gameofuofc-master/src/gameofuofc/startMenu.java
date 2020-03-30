@@ -28,7 +28,6 @@ public class startMenu extends Application {
 	
 	/**
 	* The method display() displays all the features, which were organized in GridPane.
-	* @param Nothing
 	* @throws Exception 
 	* @return variable of type ArrayList<Player>
 	*/
@@ -79,7 +78,6 @@ public class startMenu extends Application {
 				* the START button. It checks if any player names were entered, and if the 
 				* user wants to play against an AI. 
 				* @param variable of type ActionEvent
-				* @return Nothing
 				*/
 			   
 			   	@Override
@@ -127,7 +125,6 @@ public class startMenu extends Application {
 				* When clicked, it calls for an old list of player names, which will tell 
 				* the main class to load a previous game with those players. 
 				* @param variable of type ActionEvent
-				* @return Nothing
 				*/
 			   
 			   	@Override

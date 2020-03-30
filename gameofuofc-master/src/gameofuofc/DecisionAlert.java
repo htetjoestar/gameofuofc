@@ -46,8 +46,6 @@ public class DecisionAlert {
     /** 
     * The method initialize() notifies the user when they have landed on a decision spot 
     * and gives them options. 
-    * @param None
-    * @returns Nothing
     */
     @FXML
     void initialize() {
@@ -55,9 +53,8 @@ public class DecisionAlert {
     }
 	/**
 	* The display(Decisions theDe) is an internal class that launches the decisions screen. 
-	* @param variable of type Decisions 
 	* @throws IOException 
-	* @return integer, which represents an option 
+	* @return integer which represents an option 
 	*/
 	
 	public int display(Decisions theDe) throws IOException {
@@ -72,8 +69,6 @@ public class DecisionAlert {
     /** 
     * The method Show(Action event) handles the event at which a button has been clicked 
     * to reveal the question and options. 
-    * @param variable of type Action 
-    * @return Nothing 
     */
 		
     @FXML
@@ -93,7 +88,6 @@ public class DecisionAlert {
     * The method closeWindow(ActionEvent event) handles the event at which the user 
     * selected option 2. 
     * @param variable of type ActionEvent 
-    * @return Nothing 
     */
 	
     @FXML
@@ -105,8 +99,7 @@ public class DecisionAlert {
     /**
     * The method op1effs(ActionEvent event) handles the event at which the user 
     * selected option 1. 
-    * @param variable of type ActionEvent 
-    * @return Nothing 
+    * @param variable of type ActionEvent  
     */
 	
     @FXML
