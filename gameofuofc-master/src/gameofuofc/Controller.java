@@ -184,7 +184,7 @@ public class Controller extends Main{
 			//call method to add to or subtract from social metric
 			players[numPlayer].setPlayerSocial(players[numPlayer].getSocial() + boardObject.getSquare(moveLoc).getEffectVal());
 			previousTurnP.setText("Previous turn:" + players[numPlayer].getName());
-			previousTurnE.setText(Integer.toString(boardObject.getSquare(moveLoc).getEffectVal()) + " Has been added to grades");
+			previousTurnE.setText(Integer.toString(boardObject.getSquare(moveLoc).getEffectVal()) + " Has been added to social");
 			break;
 		case 'w':
 			//call method to draw wild-card
@@ -221,7 +221,7 @@ public class Controller extends Main{
 		case 's':
 			//call method to add to or subtract from social metric
 			System.out.println(Integer.toString(drawn.getEffectVal()) + " has been added to social");
-			players[numPlayer].setPlayerGrades(players[numPlayer].getSocial() + drawn.getEffectVal());
+			players[numPlayer].setPlayerSocial(players[numPlayer].getSocial() + drawn.getEffectVal());
 			if(players[numPlayer].getIsAI() == false) {
 			try {
 				new wildcardHandler().display(drawn.getDisc(), "social score", Integer.toString(drawn.getEffectVal()));
@@ -233,7 +233,7 @@ public class Controller extends Main{
 		case 'b':
 			System.out.println(Integer.toString(drawn.getEffectVal()) + " has been added to both grades and social");
 			players[numPlayer].setPlayerGrades(players[numPlayer].getGrades() + drawn.getEffectVal());
-			players[numPlayer].setPlayerGrades(players[numPlayer].getSocial() + drawn.getEffectVal());
+			players[numPlayer].setPlayerSocial(players[numPlayer].getSocial() + drawn.getEffectVal());
 			if(players[numPlayer].getIsAI() == false) {
 			try {
 				new wildcardHandler().display(drawn.getDisc(), "grades and social score", Integer.toString(drawn.getEffectVal()));

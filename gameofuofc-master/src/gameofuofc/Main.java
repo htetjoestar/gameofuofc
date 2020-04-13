@@ -24,7 +24,7 @@ public class Main{
 // Main instance variables
 
 		public static Board boardObject = new Board();
-		public static Player[] players = {null, null};
+		public static Player[] players = {new Player(0, ""), new Player(1, "")};
 		public static int currentPlayer = 0;
 		static int selection;
 		static int ModulusCounter = 2;
@@ -213,12 +213,12 @@ public class Main{
 			case 's':
 				//call method to add to or subtract from social metric
 				System.out.println(Integer.toString(drawn.getEffectVal()) + " has been added to social");
-				players[numPlayer].setPlayerGrades(players[numPlayer].getSocial() + drawn.getEffectVal());
+				players[numPlayer].setPlayerSocial(players[numPlayer].getSocial() + drawn.getEffectVal());
 				break;
 			case 'b':
 				System.out.println(Integer.toString(drawn.getEffectVal()) + " has been added to both grades and social");
 				players[numPlayer].setPlayerGrades(players[numPlayer].getGrades() + drawn.getEffectVal());
-				players[numPlayer].setPlayerGrades(players[numPlayer].getSocial() + drawn.getEffectVal());
+				players[numPlayer].setPlayerSocial(players[numPlayer].getSocial() + drawn.getEffectVal());
 				break;
 			}
 		}
@@ -444,18 +444,30 @@ public class Main{
 	public static void inputPlayerNames() {  // takes player input + sets player names based on inputs
 		Scanner playernamein = new Scanner(System.in);
 
-		for (int i = 0; i < players.length; i++) {
-			
-			
-			System.out.println("Input the name for player " + (i+1));
-			String input = playernamein.nextLine();
-			if(input.equals("")) {
-				players[i].setPlayerName(players[i].randomBot());
-				players[i].setIsAI(true);
-			}
-			else {
-			players[i].setPlayerName(input);
-			}
+//		for (int i = 0; i < players.length; i++) {
+//			
+//			
+//			System.out.println("Input the name for player " + (i+1));
+//			String input = playernamein.nextLine();
+//			if(input.equals("")) {
+//				players[i].setPlayerName(players[i].randomBot());
+//				players[i].setIsAI(true);
+//			} else {
+//			players[i].setPlayerName(input);
+//			}
+//		}
+		
+		System.out.println("Input the name for player 1");
+		String input = playernamein.nextLine();
+		players[0].setPlayerName(input);
+		
+		System.out.println("Input the name for player 2. To play against a bot, just press enter.");
+		input = playernamein.nextLine();
+		if(input.equals("")) {
+			players[1].setPlayerName(players[1].randomBot());
+			players[1].setIsAI(true);
+		} else {
+			players[1].setPlayerName(input);	
 		}
 	}
 	
